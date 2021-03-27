@@ -8,14 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://src/scripts/entities/Entity.gd"
+}, {
+"base": "Node",
+"class": "Friendly",
+"language": "GDScript",
+"path": "res://src/scripts/entities/friendlies/Friendly.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://src/scripts/util/StateMachine.gd"
+} ]
 _global_script_class_icons={
-
+"Entity": "",
+"Friendly": "",
+"StateMachine": ""
 }
 
 [application]
 
 config/name="Game"
+config/icon="res://icon.png"
 
 [rendering]
 
