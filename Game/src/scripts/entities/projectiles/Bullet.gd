@@ -11,16 +11,16 @@ func _ready():
 	# Set random projectile
 	var random = rng.randi_range(0, 3)
 	if random == 0:
-		$Sprite.texture("res://assets/battery.png")
+		$Sprite.set_texture(load("res://assets/battery.png"))
 	elif random == 1:
-		$Sprite.texture("res://assets/nut.png")
+		$Sprite.set_texture(load("res://assets/nut.png"))
 	elif random == 2:
-		$Sprite.texture("res://assets/wingbolt.png")
+		$Sprite.set_texture(load("res://assets/wingbolt.png"))
 
 func start_position(pos, enemyBody):
 	position = pos  # Spawn point
 	targetBody = enemyBody  # Enemy body to track
-	velocity = find_enemy(targetBody.global_position()) # Fire towards enemy
+	velocity = find_enemy(targetBody.position) # Fire towards enemy
 	
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
@@ -35,11 +35,14 @@ func _physics_process(delta):
 				collision.collider.damage(damage)
 				queue_free()
 	#update direction/position of enemy if bullets are homing
-	if homing:
-		velocity = find_enemy(targetBody.global_position())
+	if homing && targetBody != null:
+		velocity = find_enemy(targetBody.position)
 		
 func find_enemy(enemyPosition):
-	return Vector2(speed, 0).rotated(enemyPosition)
+	var angle = position.angle_to(enemyPosition) 
+	var vector = Vector2(speed, 0).rotated(angle)
+	print(enemyPosition)
+	return vector
 	
 
 func _on_VisibilityNotifier2D_screen_exited():

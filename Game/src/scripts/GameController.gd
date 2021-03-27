@@ -42,7 +42,7 @@ func update_build():
 			structure.set_global_position(mouse_to_grid())
 			structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
-		num_monsters_left = 1000 * wave_number
+		num_monsters_left = 1 * wave_number
 			
 func can_afford():
 	return true

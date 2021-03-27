@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scripts/entities/Entity.gd"
 }, {
-"base": "Node",
+"base": "Entity",
 "class": "Friendly",
 "language": "GDScript",
 "path": "res://src/scripts/entities/friendlies/Friendly.gd"

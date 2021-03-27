@@ -1,6 +1,6 @@
 class_name Enemy extends Entity
 
-var move_speed = 200
+var move_speed = 30
 
 var path
 

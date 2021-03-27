@@ -1,4 +1,4 @@
-class_name Friendly extends Node
+class_name Friendly extends Entity
 
 func _ready():
 	pass
