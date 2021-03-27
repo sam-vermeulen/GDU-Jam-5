@@ -13,7 +13,6 @@ func _state_logic(delta):
 		parent.update_fighting()
 		
 	if state == states.build:
-		print("build")
 		parent.update_build()
 	
 	if state == states.gameover:

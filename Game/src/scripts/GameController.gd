@@ -13,7 +13,7 @@ onready var structure_list = $Structures
 var currency = Vector3()
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
-var selected_structure_scene
+onready var selected_structure_scene = load("res://src/scenes/entities/Turret.tscn")
 
 var path = PoolVector2Array()
 
@@ -22,6 +22,7 @@ func _ready():
 	setup_timer()
 
 func update_fighting():
+	spawn_timer.start()
 	pass
 	
 func _spawn_monsters():
@@ -40,9 +41,11 @@ func update_build():
 			var structure = selected_structure_scene.instance()
 			structure.set_global_position(mouse_to_grid())
 			structure_list.add_child(structure)
+	elif Input.is_action_just_pressed("next_wave"):
+		num_monsters_left = 1000 * wave_number
 			
 func can_afford():
-	true
+	return true
 
 func update_pause():
 	pass
@@ -86,7 +89,8 @@ func setup_timer():
 	
 func mouse_to_grid():
 	var mouse = get_viewport().get_mouse_position()
-	mouse.x = floor(mouse.x / 16)
-	mouse.y = floor(mouse.y / 16)
+	mouse.x = floor(mouse.x / 16) * 16 + 6
+	mouse.y = floor(mouse.y / 16) * 16 + 6
+	return mouse
 	
 
