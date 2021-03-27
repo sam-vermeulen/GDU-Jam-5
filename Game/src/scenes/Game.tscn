@@ -10,7 +10,7 @@ script = ExtResource( 2 )
 [node name="Mainframe" parent="." instance=ExtResource( 1 )]
 
 [node name="Robot" parent="." instance=ExtResource( 3 )]
-position = Vector2( 19.2086, -0.448212 )
+position = Vector2( 55.4952, 3.78963 )
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource( 2 )

@@ -20,12 +20,14 @@ func _get_transition(delta):
 			if parent._should_chase():
 				return states.chase
 			elif parent._should_explode():
+				print("explode")
 				return states.explode
 				
 		states.explode:
 			if parent._should_explode():
 				return states.explode
 			elif parent._should_chase():
+				print("chase")
 				return states.chase
 	return null
 
