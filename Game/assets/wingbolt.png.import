@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wall.png-002cd1d8eda8e10be68271b5bde28c8f.stex"
+path="res://.import/wingbolt.png-b003781f5252744990d6ecdef3b5b67c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Wall.png"
-dest_files=[ "res://.import/Wall.png-002cd1d8eda8e10be68271b5bde28c8f.stex" ]
+source_file="res://assets/wingbolt.png"
+dest_files=[ "res://.import/wingbolt.png-b003781f5252744990d6ecdef3b5b67c.stex" ]
 
 [params]
 

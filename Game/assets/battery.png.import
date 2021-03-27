@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mainframe.png-bbeb41cc879429d313d4b5174f2c21e4.stex"
+path="res://.import/battery.png-0291d92f3cb8a965d4b9647e0eab9582.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mainframe.png"
-dest_files=[ "res://.import/Mainframe.png-bbeb41cc879429d313d4b5174f2c21e4.stex" ]
+source_file="res://assets/battery.png"
+dest_files=[ "res://.import/battery.png-0291d92f3cb8a965d4b9647e0eab9582.stex" ]
 
 [params]
 
