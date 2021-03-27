@@ -1,17 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/scripts/entities/enemies/Robot.gd" type="Script" id=2]
-[ext_resource path="res://src/scripts/entities/enemies/RobotStates.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.35396, 7.42195 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 4 ), SubResource( 3 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
 
 [node name="Robot" type="KinematicBody2D"]
 script = ExtResource( 2 )
+max_health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
-
-[node name="StateMachine" type="Node2D" parent="."]
-script = ExtResource( 3 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.15749, -0.196862 )
+scale = Vector2( 0.980314, 1.02461 )
+frames = SubResource( 7 )
+playing = true
