@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/turretsprite.png" type="Texture" id=1]
+[ext_resource path="res://assets/Wall.png" type="Texture" id=1]
 [ext_resource path="res://src/scripts/ui/SelectMenu.gd" type="Script" id=2]
 [ext_resource path="res://src/scripts/ui/ShowOptions.gd" type="Script" id=3]
 

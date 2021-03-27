@@ -6,10 +6,14 @@ var spawn_timer
 export(float) var spawn_delay
 
 var wave_number = 1
-var num_monsters_left = 1000000
+var num_monsters_left = 0
 onready var monster_list = $Monsters
+onready var structure_list = $Structures
+
+var currency = Vector3()
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
+var selected_structure_scene
 
 var path = PoolVector2Array()
 
@@ -29,12 +33,17 @@ func _spawn_monsters():
 		num_monsters_left = num_monsters_left - 1
 	else:
 		spawn_timer.stop()
-		
-	pass
 
 func update_build():
-	pass
-	
+	if Input.is_action_just_pressed("place_structure"):
+		if can_afford():
+			var structure = selected_structure_scene.instance()
+			structure.set_global_position(mouse_to_grid())
+			structure_list.add_child(structure)
+			
+func can_afford():
+	true
+
 func update_pause():
 	pass
 	
@@ -73,5 +82,11 @@ func setup_timer():
 	spawn_timer.wait_time = spawn_delay
 	spawn_timer.connect("timeout", self, "_spawn_monsters")
 	spawn_timer.start()
+	
+	
+func mouse_to_grid():
+	var mouse = get_viewport().get_mouse_position()
+	mouse.x = floor(mouse.x / 16)
+	mouse.y = floor(mouse.y / 16)
 	
 

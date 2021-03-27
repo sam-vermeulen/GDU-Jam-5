@@ -2,7 +2,6 @@ extends Enemy
 
 var target = null
 
-
 func _ready():
 	target = get_node("/root/Game/Mainframe")
 	pass

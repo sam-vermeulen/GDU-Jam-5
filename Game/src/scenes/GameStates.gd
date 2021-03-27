@@ -6,13 +6,14 @@ func _ready():
 	add_state("fight")
 	add_state("build")
 	add_state("gameover")
-	call_deferred("set_state", states.fight) # SWITCH TO BUILD
+	call_deferred("set_state", states.build)
 
 func _state_logic(delta):
 	if state == states.fight:
 		parent.update_fighting()
 		
 	if state == states.build:
+		print("build")
 		parent.update_build()
 	
 	if state == states.gameover:
