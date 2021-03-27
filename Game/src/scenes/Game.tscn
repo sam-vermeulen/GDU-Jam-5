@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/entities/Mainframe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scripts/GameController.gd" type="Script" id=2]
 [ext_resource path="res://src/scenes/entities/Robot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scenes/GameStates.gd" type="Script" id=4]
+[ext_resource path="res://src/scenes/ui/CurrencyMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scenes/ui/SelectMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/scenes/placeable/FactoryMap.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
 spawn_delay = 1.0
 
 [node name="Mainframe" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 64 )
 
 [node name="Robot" parent="." instance=ExtResource( 3 )]
 position = Vector2( 76.3405, -0.0934758 )
@@ -20,4 +24,26 @@ script = ExtResource( 4 )
 [node name="Monsters" type="Node" parent="."]
 
 [node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2( 134.134, -0.561234 )
+position = Vector2( 80, 64 )
+max_health = 0.0
+
+[node name="GameController" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Currency" parent="UI" instance=ExtResource( 4 )]
+margin_right = -40.0
+margin_bottom = -40.0
+
+[node name="Control" parent="UI" instance=ExtResource( 5 )]
+anchor_top = 0.4
+anchor_bottom = 2.0
+margin_bottom = -24.0
+
+[node name="FactoryMap" parent="." instance=ExtResource( 6 )]

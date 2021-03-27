@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SlimeCurrency.png-55c502060d06f3a708c628d1d46e746c.stex"
+path="res://.import/FactoryTiles.png-88ec476810904e067323fd740ae1116d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SlimeCurrency.png"
-dest_files=[ "res://.import/SlimeCurrency.png-55c502060d06f3a708c628d1d46e746c.stex" ]
+source_file="res://assets/FactoryTiles.png"
+dest_files=[ "res://.import/FactoryTiles.png-88ec476810904e067323fd740ae1116d.stex" ]
 
 [params]
 
