@@ -7,6 +7,10 @@
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.18924
+margin_top = 25.5679
+margin_right = 1.18921
+margin_bottom = 25.5679
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

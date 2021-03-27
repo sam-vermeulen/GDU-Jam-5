@@ -16,6 +16,7 @@ func kill():
 
 func on_death():
 	emit_signal("killed")
+	kill()
 
 func _set_health(value):
 	var prev_health = health
