@@ -1,10 +1,23 @@
 class_name Entity extends Node
 
-export(int) var health
-export(Vector2) var position
+signal health_changed(health)
+signal killed()
 
-var state_machine
+export(float) var max_health
 
-func _ready():
-	pass
+onready var health = max_health setget _set_health
+
+func damage(amount):
+	_set_health(health - amount)
+
+func on_death():
+	emit_signal("killed")
+
+func _set_health(value):
+	var prev_health = health
+	health = clamp(value, 0, max_health)
+	if health != prev_health:
+		emit_signal("health_changed", health)
+		if health == 0:
+			on_death()
 

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Entity",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/scripts/entities/enemies/Enemy.gd"
+}, {
 "base": "Node",
 "class": "Entity",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://src/scripts/util/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
 "Entity": "",
 "Friendly": "",
 "StateMachine": ""
