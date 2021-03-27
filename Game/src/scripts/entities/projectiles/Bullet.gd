@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (int) var speed = 20
-export (int) var damage = 5
+export (int) var speed
+export (int) var damage
 export (bool) var homing = false
 var targetBody
 var velocity = Vector2()
@@ -9,7 +9,10 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	# Set random projectile
+	
+	rng.randomize()
 	var random = rng.randi_range(0, 3)
+	print(random)
 	if random == 0:
 		$Sprite.set_texture(load("res://assets/battery.png"))
 	elif random == 1:
@@ -39,10 +42,8 @@ func _physics_process(delta):
 		velocity = find_enemy(targetBody.position)
 		
 func find_enemy(enemyPosition):
-	var angle = position.angle_to(enemyPosition) 
-	var vector = Vector2(speed, 0).rotated(angle)
-	print(enemyPosition)
-	return vector
+	$Sprite.rotation = position.angle_to(enemyPosition) - PI/2
+	return (enemyPosition - position).normalized() * speed
 	
 
 func _on_VisibilityNotifier2D_screen_exited():

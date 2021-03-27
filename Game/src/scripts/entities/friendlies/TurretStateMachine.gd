@@ -19,10 +19,10 @@ func _state_logic(delta):
 func _get_transition(delta):
 	match state:
 		states.shoot:
-			if parent._should_shoot():
-				return states.shoot
-			elif parent._should_idle():
+			if parent._should_idle():
 				return states.idle
+			elif parent._should_shoot():
+				return states.shoot
 				
 		states.idle:
 			if parent._should_shoot():

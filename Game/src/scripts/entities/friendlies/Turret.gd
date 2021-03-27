@@ -4,13 +4,24 @@ var enemy_list = []
 
 onready var bullet_scene = load("res://src/scenes/entities/projectiles/Bullet.tscn")
 
+var shoot_delay = 0.1
+var shoot_timer = null
+var can_shoot = true
+
+func _ready():
+	setup_timer()
+
 func _shoot():
 	if !enemy_list.empty():
 		$Sprite.look_at(enemy_list[0].global_position)
 		$Sprite.rotate(PI)
-		var bullet = bullet_scene.instance()
-		bullet.start_position(global_position, enemy_list[0])
-		$Bullets.add_child(bullet)
+		
+		if (can_shoot):
+			var bullet = bullet_scene.instance()
+			bullet.start_position(global_position, enemy_list[0])
+			$Bullets.add_child(bullet)
+			can_shoot = false
+			shoot_timer.start()
 	pass
 
 func _idle():
@@ -22,12 +33,10 @@ func _should_shoot():
 	return false
 	
 func _should_idle():
+	print(enemy_list)
 	if (enemy_list.empty()):
 		return true
 	return false
-
-func _ready():
-	pass 
 
 # Enemy body enters area2d
 func _on_Area2D_body_entered(body):
@@ -36,4 +45,15 @@ func _on_Area2D_body_entered(body):
 # Enemy body leaves area2d
 func _on_Area2D_body_exited(body):
 	enemy_list.erase(body)
+
+func _toggle_shoot():
+	can_shoot = true
+	
+func setup_timer():
+	shoot_timer = Timer.new()
+	add_child(shoot_timer)
+	shoot_timer.autostart = true
+	shoot_timer.wait_time = shoot_delay
+	shoot_timer.connect("timeout", self, "_toggle_shoot")
+	shoot_timer.start()
 

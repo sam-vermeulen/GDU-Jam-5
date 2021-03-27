@@ -7,9 +7,9 @@
 
 [node name="Bullet" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 8
 script = ExtResource( 1 )
-speed = 100
+speed = 500
 homing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

@@ -32,9 +32,10 @@ animations = [ {
 } ]
 
 [node name="Robot" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 2 )
-max_health = 10.0
+max_health = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -43,7 +44,7 @@ shape = SubResource( 1 )
 position = Vector2( -0.15749, -0.196862 )
 scale = Vector2( 0.980314, 1.02461 )
 frames = SubResource( 6 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="StateMachine" type="Node" parent="."]

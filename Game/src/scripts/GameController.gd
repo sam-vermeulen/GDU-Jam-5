@@ -10,7 +10,7 @@ var num_monsters_left = 0
 onready var monster_list = $Monsters
 onready var structure_list = $Structures
 
-var currency = Vector3()
+var currency = Vector3() # nuts, slime, cpus
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
 onready var selected_structure_scene = load("res://src/scenes/entities/Turret.tscn")
