@@ -12,6 +12,7 @@ func damage(amount):
 
 func kill():
 	_set_health(0)
+	queue_free()
 
 func on_death():
 	emit_signal("killed")

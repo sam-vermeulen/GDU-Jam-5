@@ -41,7 +41,7 @@ shape = SubResource( 1 )
 position = Vector2( -0.15749, -0.196862 )
 scale = Vector2( 0.980314, 1.02461 )
 frames = SubResource( 6 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="StateMachine" type="Node" parent="."]

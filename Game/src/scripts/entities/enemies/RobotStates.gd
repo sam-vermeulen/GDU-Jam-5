@@ -1,13 +1,13 @@
 extends StateMachine
 
 func _ready():
-	add_state("chase")
+	add_state("follow_path")
 	add_state("explode")
-	call_deferred("set_state", states.chase)
+	call_deferred("set_state", states.follow_path)
 
 func _state_logic(delta):
-	if state == states.chase:
-		parent._chase_target()
+	if state == states.follow_path:
+		parent._follow_path()
 	else:
 		parent._stop()
 		
@@ -16,19 +16,17 @@ func _state_logic(delta):
 
 func _get_transition(delta):
 	match state:
-		states.chase:
-			if parent._should_chase():
-				return states.chase
+		states.follow_path:
+			if parent._should_follow_path():
+				return states.follow_path
 			elif parent._should_explode():
-				print("explode")
 				return states.explode
 				
 		states.explode:
 			if parent._should_explode():
 				return states.explode
-			elif parent._should_chase():
-				print("chase")
-				return states.chase
+			elif parent._should_follow_path():
+				return states.follow_path
 	return null
 
 func _enter_state(new_state, old_state):
