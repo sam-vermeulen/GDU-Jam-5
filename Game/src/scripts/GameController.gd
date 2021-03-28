@@ -39,12 +39,12 @@ func _spawn_monsters():
 
 func update_build():
 	if Input.is_action_just_pressed("place_structure"):
-		if can_afford():
-			var structure = selected_structure_scene.instance()
+		var structure = selected_structure_scene.instance()
+		if can_afford(structure): # Pass in structure cost defined in hud
 			structure.set_position(mouse_to_grid())
 			structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
-		num_monsters_left = 5000 * wave_number
+		num_monsters_left = 5 * wave_number
 		
 func update_fighting():
 	if Input.is_action_just_pressed("place_structure"):
@@ -69,8 +69,17 @@ func update_fighting():
 					hacking = true
 					chosen_hack = i
 
-func can_afford():
-	return true
+func can_afford(structure):
+	if structure.name == "Turret":
+		var balance = $HUD/CurrencyMenu/Panel/ScrewCount.text.to_int()
+		if balance >= structure.cost:
+			balance -= structure.cost
+			$HUD/CurrencyMenu/Panel/ScrewCount.text = String(balance)
+			return true
+	#Logic: Check structure name to determine currency, check if balance is >= cost
+	
+	return true	
+	#return false
 
 func update_pause():
 	pass
@@ -114,8 +123,11 @@ func setup_timer():
 	
 func mouse_to_grid():
 	var mouse = get_viewport().get_mouse_position()
+	#Prints grid coord of mouse
+	print($Navigation2D/FactoryMap.world_to_map(mouse))
 	mouse.x = floor(mouse.x / 16) * 16 + 6
 	mouse.y = floor(mouse.y / 16) * 16 + 6
+	
 	return mouse
 	
 

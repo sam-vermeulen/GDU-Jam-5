@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/Screw.png" type="Texture" id=1]
+[ext_resource path="res://assets/cpu.png" type="Texture" id=1]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.560227 ), 0.0, 0.0, 0, 0 ]
@@ -21,9 +21,9 @@ orbit_velocity_random = 0.0
 scale = 0.5
 scale_curve = SubResource( 2 )
 
-[node name="ScrewDrop" type="Particles2D"]
+[node name="CPUDrop" type="Particles2D"]
 emitting = false
-amount = 3
+amount = 1
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
