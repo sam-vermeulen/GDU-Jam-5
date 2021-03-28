@@ -13,7 +13,8 @@ onready var structure_list = $Structures
 var currency = Vector3(50, 0, 1) # nuts, slime, cpus
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
-onready var selected_structure_scene = load("res://src/scenes/entities/Turret.tscn")
+onready var turret_scene = load("res://src/scenes/entities/Turret.tscn")
+var selected_structure_scene = null
 
 var path = PoolVector2Array()
 
@@ -24,6 +25,11 @@ var hacking = false
 
 func _ready():
 	update_hud()
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret.connect("pressed", self, "change_turret", ["turret"])
+	var t = turret_scene.instance()
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Screws.text = String(t.cost.x)
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Slime.text = String(t.cost.y)
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/CPUs.text = String(t.cost.z)
 	$Mainframe.connect("damaged", self, "update_hud")
 	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	hacks.append(SelfDestruct.new())
@@ -47,11 +53,12 @@ func update_build():
 			var cell_type = get_cell_type(tile_clicked)
 			print(cell_type)
 			if cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
-				var structure = selected_structure_scene.instance()
-				if can_afford(structure): # Pass in structure cost defined in hud
-					structure.set_position(snap_to_grid(get_viewport().get_mouse_position()))
-					structure_positions.append(tile_clicked)
-					structure_list.add_child(structure)
+				if selected_structure_scene != null:
+					var structure = selected_structure_scene.instance()
+					if can_afford(structure): # Pass in structure cost defined in hud
+						structure.set_position(snap_to_grid(get_viewport().get_mouse_position()))
+						structure_positions.append(tile_clicked)
+						structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
 		num_monsters_left = 5 * wave_number
 		
@@ -155,3 +162,7 @@ func update_hud():
 	$HUD/CurrencyMenu/Panel/CPUCount.text = String(currency.z)
 	$HUD/MainframeHP/Panel/Health.text = String($Mainframe.health)
 	$HUD/WaveMenu/Panel/WaveNum.text = String(wave_number)
+	
+func change_turret(button):
+	if button == "turret":
+		selected_structure_scene = turret_scene

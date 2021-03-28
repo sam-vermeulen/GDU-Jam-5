@@ -29,6 +29,8 @@ script = ExtResource( 4 )
 
 [node name="Monsters" type="Node" parent="."]
 
+[node name="Particles" type="Node" parent="."]
+
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 437.274, 39.392 )
 

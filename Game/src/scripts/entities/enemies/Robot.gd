@@ -36,8 +36,8 @@ func kill():
 	var cpu_drop = load("res://src/scenes/particles/CPUDrop.tscn").instance()
 	cpu_drop.position = position
 	screw_drop.position = position
-	get_parent().add_child(cpu_drop)
-	get_parent().add_child(screw_drop)
+	get_parent().get_parent().get_node("./Particles").add_child(cpu_drop)
+	get_parent().get_parent().get_node("./Particles").add_child(screw_drop)
 	game.currency.x += 3
 	game.currency.z += 1
 	game.update_hud()

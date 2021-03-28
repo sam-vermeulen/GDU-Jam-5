@@ -10,9 +10,9 @@ func _ready():
 func expand():
 	is_expanded = !is_expanded
 	if (is_expanded):
-		$VBoxContainer/TextureButton.show()
+		$VBoxContainer/Turret.show()
 	else:
-		$VBoxContainer/TextureButton.hide()
+		$VBoxContainer/Turret.hide()
 
 
 var last_rect_size = Vector2.ZERO
