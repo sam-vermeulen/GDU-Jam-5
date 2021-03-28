@@ -22,6 +22,7 @@ var chosen_hack
 var hacking = false
 
 func _ready():
+	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	hacks.append(SelfDestruct.new())
 	hacks.append(Lightning.new())
 	calculate_path()
