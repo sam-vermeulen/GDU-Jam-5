@@ -47,6 +47,14 @@ func update_build():
 		num_monsters_left = 5000 * wave_number
 		
 func update_fighting():
+	if Input.is_action_just_pressed("place_structure"):
+		var mouse = get_viewport().get_mouse_position()
+		var hits = get_parent().world_2d.direct_space_state.intersect_point(mouse)
+		var target = hits[0].collider
+		if (hacking):
+			hacks[chosen_hack].use(target)
+		
+			
 	spawn_timer.start()
 	for i in range(hacks.size()):
 		var hack_str = "hack_" + str(i+1)
@@ -60,10 +68,6 @@ func update_fighting():
 				else:
 					hacking = true
 					chosen_hack = i
-					
-func _on_UsedHack_input(body):
-	if (hacking):
-		hacks[chosen_hack].use(body)
 
 func can_afford():
 	return true

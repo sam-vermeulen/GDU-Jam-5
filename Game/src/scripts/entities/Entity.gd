@@ -12,11 +12,8 @@ func damage(amount):
 
 func kill():
 	_set_health(0)
-	queue_free()
-
-func on_death():
 	emit_signal("killed")
-	kill()
+	queue_free()
 
 func _set_health(value):
 	var prev_health = health
@@ -24,5 +21,5 @@ func _set_health(value):
 	if health != prev_health:
 		emit_signal("health_changed", health)
 		if health == 0:
-			on_death()
+			kill()
 
