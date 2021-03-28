@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/scenes/ui/CurrencyMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/ui/TurretMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/scenes/ui/WaveMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scenes/ui/MainframeHP.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scenes/ui/HackUI.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -26,3 +27,8 @@ margin_right = 208.0
 [node name="MainframeHP" parent="." instance=ExtResource( 4 )]
 margin_top = 16.0
 margin_bottom = 16.0
+
+[node name="HackUI" parent="." instance=ExtResource( 5 )]
+margin_left = 208.0
+margin_top = 368.0
+margin_right = -306.0

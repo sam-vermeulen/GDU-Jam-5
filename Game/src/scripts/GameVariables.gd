@@ -11,7 +11,7 @@ var turret_damage = 2
 var robot_drop = Vector3(3, 0, 1)
 var robot_speed = 100
 var robot_health = 100
-var robot_damage = 1
+var robot_damage = 500
 
 # explode hack
 var explode_cost = Vector3(0, 0, 50)

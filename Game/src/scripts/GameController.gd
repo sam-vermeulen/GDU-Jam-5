@@ -58,7 +58,6 @@ func update_fighting():
 func handle_structure():
 	if Input.is_action_just_pressed("place_structure"):
 		print(get_viewport().get_mouse_position())
-		print($Camera2D.position)
 		var tile_clicked = position_to_tile(get_viewport().get_mouse_position())
 		var cell_type = get_cell_type(tile_clicked)
 		print(cell_type)
