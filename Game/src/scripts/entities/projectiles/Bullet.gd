@@ -12,7 +12,6 @@ func _ready():
 	
 	rng.randomize()
 	var random = rng.randi_range(0, 3)
-	print(random)
 	if random == 0:
 		$Sprite.set_texture(load("res://assets/battery.png"))
 	elif random == 1:

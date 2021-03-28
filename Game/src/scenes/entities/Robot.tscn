@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Robot.png" type="Texture" id=1]
 [ext_resource path="res://src/scripts/entities/enemies/Robot.gd" type="Script" id=2]
@@ -31,6 +31,8 @@ animations = [ {
 "speed": 4.0
 } ]
 
+[sub_resource type="CircleShape2D" id=7]
+
 [node name="Robot" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 8
@@ -49,3 +51,9 @@ playing = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 7 )
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]

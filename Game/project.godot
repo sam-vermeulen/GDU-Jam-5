@@ -25,6 +25,21 @@ _global_script_classes=[ {
 "path": "res://src/scripts/entities/friendlies/Friendly.gd"
 }, {
 "base": "Node",
+"class": "Hack",
+"language": "GDScript",
+"path": "res://src/scripts/hacks/Hack.gd"
+}, {
+"base": "Node",
+"class": "Lightning",
+"language": "GDScript",
+"path": "res://src/scripts/hacks/Lighting.gd"
+}, {
+"base": "Node",
+"class": "SelfDestruct",
+"language": "GDScript",
+"path": "res://src/scripts/hacks/SelfDestruct.gd"
+}, {
+"base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://src/scripts/util/StateMachine.gd"
@@ -38,6 +53,9 @@ _global_script_class_icons={
 "Enemy": "",
 "Entity": "",
 "Friendly": "",
+"Hack": "",
+"Lightning": "",
+"SelfDestruct": "",
 "StateMachine": "",
 "Turret": ""
 }
