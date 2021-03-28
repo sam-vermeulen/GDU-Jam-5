@@ -17,7 +17,7 @@ var robot_drop = Vector3(3, 0, 1)
 var robot_speed = 100
 var robot_min_speed = 30
 var robot_health = 100
-var robot_damage = 1
+var robot_damage = 500
 
 var hack_cooldown = 1
 
