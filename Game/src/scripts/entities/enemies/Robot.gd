@@ -31,7 +31,6 @@ func _explode():
 	if (target != null):
 		target.damage(1)
 		kill()
-	pass
 
 func _on_Area2D_mouse_entered():
 	if (Input.is_action_just_pressed("place_structure")):

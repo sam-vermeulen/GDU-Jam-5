@@ -25,4 +25,3 @@ func _set_health(value):
 		emit_signal("health_changed", health)
 		if health == 0:
 			on_death()
-

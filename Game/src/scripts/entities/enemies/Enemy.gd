@@ -24,4 +24,3 @@ func _process(delta):
 		
 		path.remove(0)
 
-

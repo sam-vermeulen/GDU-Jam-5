@@ -41,6 +41,7 @@ texture = ExtResource( 3 )
 margin_left = 16.0
 margin_right = 64.0
 margin_bottom = 16.0
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -49,6 +50,7 @@ __meta__ = {
 margin_left = 80.0
 margin_right = 128.0
 margin_bottom = 16.0
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -57,6 +59,7 @@ __meta__ = {
 margin_left = 144.0
 margin_right = 192.0
 margin_bottom = 16.0
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
