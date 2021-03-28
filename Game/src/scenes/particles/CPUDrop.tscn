@@ -24,7 +24,7 @@ scale_curve = SubResource( 2 )
 
 [node name="CPUDrop" type="Particles2D"]
 emitting = false
-amount = 1
+amount = 10
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0

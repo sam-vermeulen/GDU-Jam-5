@@ -19,6 +19,7 @@ func _shoot():
 		$Sprite.rotate(PI)
 		
 		if (can_shoot):
+			$AudioStreamPlayer2D.play()
 			var bullet = bullet_scene.instance()
 			bullet.damage = GameVariables.turret_damage
 			bullet.start_position(global_position, enemy_list[0])

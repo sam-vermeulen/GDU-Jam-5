@@ -12,7 +12,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 240.0
+margin_right = 272.0
 margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -62,20 +62,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="Panel"]
-margin_left = 112.0
-margin_right = 144.0
+[node name="Cooldown" type="Label" parent="Panel"]
+margin_left = 128.0
+margin_right = 176.0
 margin_bottom = 16.0
 text = "5s"
-align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label5" type="Label" parent="Panel"]
-margin_left = 144.0
-margin_right = 192.0
+margin_left = 176.0
+margin_right = 224.0
 margin_bottom = 16.0
 text = "COST:"
 valign = 1
@@ -84,8 +83,8 @@ __meta__ = {
 }
 
 [node name="Cost" type="Label" parent="Panel"]
-margin_left = 208.0
-margin_right = 240.0
+margin_left = 240.0
+margin_right = 272.0
 margin_bottom = 16.0
 text = "5"
 align = 1
@@ -95,7 +94,7 @@ __meta__ = {
 }
 
 [node name="TextureRect3" type="TextureRect" parent="Panel"]
-margin_left = 192.0
-margin_right = 208.0
+margin_left = 224.0
+margin_right = 240.0
 margin_bottom = 16.0
 texture = ExtResource( 3 )

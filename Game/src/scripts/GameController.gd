@@ -23,6 +23,7 @@ var hacking = false
 func _ready():
 	$SpawnCooldown.wait_time = GameVariables.spawn_rate
 	$HackCooldown.wait_time = GameVariables.hack_cooldown
+	$HUD/HackUI/Panel/Cooldown.text = String(GameVariables.hack_cooldown) + "s"
 	update_hud()
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret.connect("pressed", self, "change_turret", ["turret"])
 	$HUD/HackUI/Panel/Cost.text = String(GameVariables.lightning_cost.z)
@@ -71,15 +72,14 @@ func handle_hack():
 	if ($HackCooldown.is_stopped()):
 		if Input.is_action_just_pressed("place_structure"):
 			var mouse = get_viewport().get_mouse_position()
-			var hits = get_parent().world_2d.direct_space_state.intersect_point(mouse)
-			if (hits.size() > 0):
-				var target = hits[0].collider
-				if (hacking):
-					var instance = load("res://src/scenes/hacks/" + hacks[chosen_hack] + ".tscn").instance()
-					instance.position = mouse
-					$Spells.add_child(instance)
-					instance.use()
-					$HackCooldown.start(GameVariables.hack_cooldown)
+			if (hacking && currency.z >= GameVariables.lightning_cost.z):
+				currency = currency - GameVariables.lightning_cost
+				update_hud()
+				var instance = load("res://src/scenes/hacks/" + hacks[chosen_hack] + ".tscn").instance()
+				instance.position = mouse
+				$Spells.add_child(instance)
+				instance.use()
+				$HackCooldown.start(GameVariables.hack_cooldown)
 				
 	for i in range(hacks.size()):
 		var hack_str = "hack_" + str(i+1)
@@ -161,3 +161,6 @@ func update_hud():
 func change_turret(button):
 	if button == "turret":
 		selected_structure_scene = turret_scene
+		
+func _process(delta):
+	$HUD/HackUI/Panel/Cooldown.text = String(stepify($HackCooldown.time_left, 0.01)) + "s"
