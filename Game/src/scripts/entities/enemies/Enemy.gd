@@ -7,10 +7,16 @@ var path
 func _ready():
 	set_process(false)
 
+func slow(percent):
+	set_speed(move_speed * percent)
+	
+func set_speed(amount):
+	pass
+
 func set_path(p):
 	set_process(true)
 	path = p
-	
+
 func _process(delta):
 	var start = global_position
 	var distance = move_speed * delta

@@ -63,11 +63,12 @@ func handle_structure():
 		var cell_type = get_cell_type(tile_clicked)
 		print(cell_type)
 		if cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
-			var structure = selected_structure_scene.instance()
-			if can_afford_structure(structure): # Pass in structure cost defined in hud
-				structure.set_position(snap_to_grid(get_viewport().get_mouse_position()))
-				structure_positions.append(tile_clicked)
-				structure_list.add_child(structure)
+			if (selected_structure_scene != null):
+				var structure = selected_structure_scene.instance()
+				if can_afford_structure(structure): # Pass in structure cost defined in hud
+					structure.set_position(snap_to_grid(get_viewport().get_mouse_position()))
+					structure_positions.append(tile_clicked)
+					structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
 		num_monsters_left = 5 * wave_number
 

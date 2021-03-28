@@ -4,6 +4,7 @@ var target = null
 var game = null
 
 func _ready():
+	move_speed = GameVariables.robot_speed
 	max_health = GameVariables.robot_health
 	health = GameVariables.robot_health
 	
@@ -33,6 +34,9 @@ func _explode():
 		target.damage(GameVariables.robot_damage)
 		kill()
 	pass
+	
+func set_speed(amount):
+	move_speed = clamp(amount, 0, GameVariables.robot_speed)
 
 func kill():
 	var screw_drop = load("res://src/scenes/particles/ScrewDrop.tscn").instance()

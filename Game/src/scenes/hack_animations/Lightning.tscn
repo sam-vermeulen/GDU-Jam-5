@@ -21,7 +21,6 @@ tracks/0/keys = {
 [node name="Lightning" type="Sprite"]
 texture = ExtResource( 1 )
 hframes = 5
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Lightning = SubResource( 1 )
