@@ -13,7 +13,8 @@ onready var structure_list = $Structures
 var currency = GameVariables.start_currency
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
-onready var selected_structure_scene = load("res://src/scenes/entities/Turret.tscn")
+onready var turret_scene = load("res://src/scenes/entities/Turret.tscn")
+var selected_structure_scene = null
 
 var path = PoolVector2Array()
 
@@ -24,6 +25,11 @@ var hacking = false
 
 func _ready():
 	update_hud()
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret.connect("pressed", self, "change_turret", ["turret"])
+	var t = turret_scene.instance()
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Screws.text = String(t.cost.x)
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Slime.text = String(t.cost.y)
+	$HUD/TurretMenu/Panel/VBoxContainer/Turret/CPUs.text = String(t.cost.z)
 	$Mainframe.connect("damaged", self, "update_hud")
 	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	hacks.append("Explode")
@@ -161,3 +167,7 @@ func update_hud():
 	$HUD/CurrencyMenu/Panel/CPUCount.text = String(currency.z)
 	$HUD/MainframeHP/Panel/Health.text = String($Mainframe.health)
 	$HUD/WaveMenu/Panel/WaveNum.text = String(wave_number)
+	
+func change_turret(button):
+	if button == "turret":
+		selected_structure_scene = turret_scene

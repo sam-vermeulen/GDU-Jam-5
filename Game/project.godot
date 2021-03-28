@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Game"
-run/main_scene="res://src/scenes/Game.tscn"
+run/main_scene="res://src/title/TitleScreen.tscn"
 
 [autoload]
 

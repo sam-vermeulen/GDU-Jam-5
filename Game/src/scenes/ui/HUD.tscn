@@ -16,9 +16,8 @@ __meta__ = {
 
 [node name="TurretMenu" parent="." instance=ExtResource( 2 )]
 margin_left = 448.0
-margin_top = 0.0
+margin_top = 16.0
 margin_right = 368.0
-margin_bottom = -16.2
 
 [node name="WaveMenu" parent="." instance=ExtResource( 3 )]
 margin_left = 208.0
