@@ -1,5 +1,7 @@
 extends Particles2D
 
+func _ready():
+	play_animation()
 
 func play_animation():
 	emitting = true

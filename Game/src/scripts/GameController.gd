@@ -22,6 +22,11 @@ var chosen_hack
 var hacking = false
 
 func _ready():
+	currency.x = 0
+	currency.y = 0
+	currency.z = 0
+	update_hud()
+	$Mainframe.connect("damaged", self, "update_hud")
 	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	hacks.append(SelfDestruct.new())
 	hacks.append(Lightning.new())
@@ -72,10 +77,9 @@ func update_fighting():
 
 func can_afford(structure):
 	if structure.name == "Turret":
-		var balance = $HUD/CurrencyMenu/Panel/ScrewCount.text.to_int()
-		if balance >= structure.cost:
-			balance -= structure.cost
-			$HUD/CurrencyMenu/Panel/ScrewCount.text = String(balance)
+		if currency.x >= structure.cost:
+			currency.x -= structure.cost
+			update_hud()
 			return true
 	#Logic: Check structure name to determine currency, check if balance is >= cost
 	
@@ -131,4 +135,9 @@ func mouse_to_grid():
 	
 	return mouse
 	
-
+func update_hud():
+	$HUD/CurrencyMenu/Panel/ScrewCount.text = String(currency.x)
+	$HUD/CurrencyMenu/Panel/SlimeCount.text = String(currency.y)
+	$HUD/CurrencyMenu/Panel/CPUCount.text = String(currency.z)
+	$HUD/MainframeHP/Panel/Health.text = String($Mainframe.health)
+	$HUD/WaveMenu/Panel/WaveNum.text = String(wave_number)

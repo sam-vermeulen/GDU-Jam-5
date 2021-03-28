@@ -11,7 +11,6 @@ func damage(amount):
 	_set_health(health - amount)
 
 func kill():
-	_set_health(0)
 	emit_signal("killed")
 	queue_free()
 

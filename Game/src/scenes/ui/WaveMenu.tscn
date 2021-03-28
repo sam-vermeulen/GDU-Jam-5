@@ -1,0 +1,26 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 96.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="Panel"]
+margin_right = 64.0
+margin_bottom = 32.0
+text = "WAVE: "
+align = 2
+valign = 1
+
+[node name="WaveNum" type="Label" parent="Panel"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+text = "1"
+valign = 1

@@ -1,0 +1,33 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 128.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_right = 32.0
+margin_bottom = 16.0
+text = "Mainframe HP:"
+align = 2
+valign = 1
+
+[node name="Health" type="Label" parent="Panel"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 16.0
+text = "200"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

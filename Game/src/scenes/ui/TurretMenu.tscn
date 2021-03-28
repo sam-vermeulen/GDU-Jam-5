@@ -39,7 +39,7 @@ __meta__ = {
 }
 
 [node name="Show" type="Button" parent="Panel/VBoxContainer"]
-margin_right = 40.0
+margin_right = 39.0
 margin_bottom = 20.0
 
 [node name="TextureButton" type="TextureButton" parent="Panel/VBoxContainer"]
