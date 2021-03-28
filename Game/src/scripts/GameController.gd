@@ -39,10 +39,10 @@ func update_build():
 	if Input.is_action_just_pressed("place_structure"):
 		if can_afford():
 			var structure = selected_structure_scene.instance()
-			structure.set_global_position(mouse_to_grid())
+			structure.set_position(mouse_to_grid())
 			structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
-		num_monsters_left = 1 * wave_number
+		num_monsters_left = 5000 * wave_number
 			
 func can_afford():
 	return true

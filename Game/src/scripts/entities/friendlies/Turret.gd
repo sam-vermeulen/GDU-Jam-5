@@ -4,7 +4,7 @@ var enemy_list = []
 
 onready var bullet_scene = load("res://src/scenes/entities/projectiles/Bullet.tscn")
 
-var shoot_delay = 0.1
+var shoot_delay = 0.2
 var shoot_timer = null
 var can_shoot = true
 
@@ -33,7 +33,6 @@ func _should_shoot():
 	return false
 	
 func _should_idle():
-	print(enemy_list)
 	if (enemy_list.empty()):
 		return true
 	return false

@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 export (int) var speed
 export (int) var damage
@@ -23,22 +23,15 @@ func _ready():
 func start_position(pos, enemyBody):
 	position = pos  # Spawn point
 	targetBody = enemyBody  # Enemy body to track
-	velocity = find_enemy(targetBody.position) # Fire towards enemy
+	if targetBody != null:
+		velocity = find_enemy(targetBody.position) # Fire towards enemy
+	
+func apply_velocity(delta):
+	position += velocity * delta
 	
 func _physics_process(delta):
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		#Deal damage, free bullet from queue
-		if homing:
-			if collision.collider == targetBody:
-				collision.collider.damage(damage)
-				queue_free()
-		else:
-			if collision.collider.has_method("damage"):
-				collision.collider.damage(damage)
-				queue_free()
-	#update direction/position of enemy if bullets are homing
-	if homing && targetBody != null:
+	apply_velocity(delta)
+	if (homing && targetBody != null):
 		velocity = find_enemy(targetBody.position)
 		
 func find_enemy(enemyPosition):
@@ -48,3 +41,13 @@ func find_enemy(enemyPosition):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
+
+func _on_Bullet_body_entered(body):
+	if (homing && body == targetBody || targetBody == null):
+		body.damage(damage)
+		queue_free()
+	elif (!homing && body.has_method("damage")):
+		body.damage(damage)
+		queue_free()
+		
