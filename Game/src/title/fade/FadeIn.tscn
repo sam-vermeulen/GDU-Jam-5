@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/title/fade/FadeIn.gd" type="Script" id=1]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeIn"
@@ -19,9 +21,11 @@ tracks/0/keys = {
 [node name="FadeIn" type="ColorRect"]
 margin_right = 992.0
 color = Color( 0, 0, 0, 0 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeIn = SubResource( 1 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

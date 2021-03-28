@@ -29,7 +29,6 @@ script = ExtResource( 4 )
 
 [node name="Monsters" type="Node" parent="."]
 
-[node name="Spells" type="Node" parent="."]
 [node name="Particles" type="Node" parent="."]
 
 [node name="SpawnPoint" type="Node2D" parent="."]
@@ -57,8 +56,3 @@ valign = 1
 script = ExtResource( 6 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 512, 300 )
-scale = Vector2( 0.5, 0.5 )
-current = true

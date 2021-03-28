@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scripts/hacks/Lighting.gd"
 }, {
-"base": "Area2D",
+"base": "Node",
 "class": "SelfDestruct",
 "language": "GDScript",
 "path": "res://src/scripts/hacks/SelfDestruct.gd"
@@ -68,12 +68,6 @@ run/main_scene="res://src/title/TitleScreen.tscn"
 [autoload]
 
 GameVariables="*res://src/scripts/GameVariables.gd"
-
-[display]
-
-window/size/fullscreen=true
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
 
 [input]
 
