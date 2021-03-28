@@ -1,32 +1,39 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Wall.png" type="Texture" id=1]
+[ext_resource path="res://assets/turret.png" type="Texture" id=1]
 [ext_resource path="res://src/scripts/ui/SelectMenu.gd" type="Script" id=2]
 [ext_resource path="res://src/scripts/ui/ShowOptions.gd" type="Script" id=3]
 
 [node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1.18924
-margin_top = 25.5679
-margin_right = 1.18921
-margin_bottom = 25.5679
+anchor_right = 0.125
+anchor_bottom = 0.107
+margin_top = 32.0
+margin_right = -17.0
+margin_bottom = -10.2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -1.18924
+margin_top = -25.5679
+margin_right = 38.8108
+margin_bottom = 14.4321
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.03
+anchor_top = -0.161
+anchor_right = 0.03
+anchor_bottom = -0.161
+margin_left = -0.0107601
+margin_top = 0.00790024
+margin_right = 39.9892
+margin_bottom = 40.0079
 __meta__ = {
 "_edit_use_anchors_": false
 }
