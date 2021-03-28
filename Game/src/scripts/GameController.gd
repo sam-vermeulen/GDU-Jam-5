@@ -17,13 +17,15 @@ onready var selected_structure_scene = load("res://src/scenes/entities/Turret.ts
 
 var path = PoolVector2Array()
 
+var hacks = []
+var chosen_hack
+var hacking = false
+
 func _ready():
+	hacks.append(SelfDestruct.new())
+	hacks.append(Lightning.new())
 	calculate_path()
 	setup_timer()
-
-func update_fighting():
-	spawn_timer.start()
-	pass
 	
 func _spawn_monsters():
 	if (num_monsters_left > 0):
@@ -43,7 +45,26 @@ func update_build():
 			structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
 		num_monsters_left = 5000 * wave_number
-			
+		
+func update_fighting():
+	spawn_timer.start()
+	for i in range(hacks.size()):
+		var hack_str = "hack_" + str(i+1)
+		if Input.is_action_just_pressed(hack_str):
+			if (!hacking):
+				hacking = true
+				chosen_hack = i
+			elif (hacking):
+				if (i == chosen_hack):
+					hacking = false
+				else:
+					hacking = true
+					chosen_hack = i
+					
+func _on_UsedHack_input(body):
+	if (hacking):
+		hacks[chosen_hack].use(body)
+
 func can_afford():
 	return true
 
