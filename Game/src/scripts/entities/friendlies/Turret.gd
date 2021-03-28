@@ -4,7 +4,7 @@ var enemy_list = []
 
 onready var bullet_scene = load("res://src/scenes/entities/projectiles/Bullet.tscn")
 
-export (int) var cost = 3
+var cost = Vector3(50, 0, 1)
 
 var shoot_delay = 0.2
 var shoot_timer = null
