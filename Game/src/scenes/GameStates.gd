@@ -33,7 +33,6 @@ func _enter_state(new_state, old_state):
 		
 	if (old_state == states.fight && new_state == states.build):
 		parent.wave_number = parent.wave_number + 1
-	pass
 
 func _exit_state(old_state, new_state):
 	pass
