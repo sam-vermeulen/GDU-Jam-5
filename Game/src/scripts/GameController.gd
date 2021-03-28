@@ -112,12 +112,17 @@ func update_gameover():
 	pass
 
 func _building():
+	$Grid.show()
+	$Line2D.show()
 	if (num_monsters_left == 0 && monster_list.get_child_count() == 0):
 		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		return true
 	return false
 
 func _fighting():
+	update_hud()
+	$Grid.hide()
+	$Line2D.hide()
 	if (num_monsters_left > 0 || monster_list.get_child_count() > 0):
 		return true
 	return false
@@ -142,7 +147,7 @@ func get_cell_type(tile):
 
 func snap_to_grid(position):
 	return tile_to_global(position_to_tile(position))
-
+	
 func tile_to_global(tile):
 	tile.x = tile.x * 16 + 7 
 	tile.y = tile.y * 16 + 7

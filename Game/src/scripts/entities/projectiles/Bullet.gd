@@ -37,10 +37,8 @@ func find_enemy(enemyPosition):
 	$Sprite.rotation = position.angle_to(enemyPosition) - PI/2
 	return (enemyPosition - position).normalized() * speed
 	
-
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
-
 
 func _on_Bullet_body_entered(body):
 	if (homing && body == targetBody || targetBody == null):
