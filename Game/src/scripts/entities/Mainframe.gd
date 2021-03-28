@@ -3,6 +3,7 @@ extends Entity
 signal damaged()
 
 func _ready():
+	health = GameVariables.mainframe_health
 	pass
 
 func damage(amount):

@@ -34,9 +34,12 @@ func _explode():
 		target.damage(GameVariables.robot_damage)
 		kill()
 	pass
+
+func get_max_speed():
+	return GameVariables.robot_speed
 	
-func set_speed(amount):
-	move_speed = clamp(amount, 0, GameVariables.robot_speed)
+func get_min_speed():
+	return GameVariables.robot_min_speed
 
 func kill():
 	var screw_drop = load("res://src/scenes/particles/ScrewDrop.tscn").instance()

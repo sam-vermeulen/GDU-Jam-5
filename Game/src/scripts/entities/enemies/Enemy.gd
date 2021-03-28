@@ -3,6 +3,7 @@ class_name Enemy extends Entity
 var move_speed = 200
 
 var path
+var tween = Tween.new()
 
 func _ready():
 	set_process(false)
@@ -10,8 +11,14 @@ func _ready():
 func slow(percent):
 	set_speed(move_speed * percent)
 	
-func set_speed(amount):
+func get_max_speed():
 	pass
+	
+func get_min_speed():
+	pass
+	
+func set_speed(amount):
+	move_speed = clamp(amount, get_min_speed(), get_max_speed())
 
 func set_path(p):
 	set_process(true)

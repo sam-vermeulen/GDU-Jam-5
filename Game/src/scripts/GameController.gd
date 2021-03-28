@@ -2,9 +2,6 @@ extends Node
 
 onready var mainframe = $Mainframe
 
-var spawn_timer
-export(float) var spawn_delay
-
 var wave_number = 1
 var num_monsters_left = 0
 onready var monster_list = $Monsters
@@ -24,6 +21,8 @@ var chosen_hack
 var hacking = false
 
 func _ready():
+	$SpawnCooldown.wait_time = GameVariables.spawn_rate
+	$HackCooldown.wait_time = GameVariables.hack_cooldown
 	update_hud()
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret.connect("pressed", self, "change_turret", ["turret"])
 	var t = turret_scene.instance()
@@ -35,30 +34,25 @@ func _ready():
 	hacks.append("Explode")
 	hacks.append("Lightning")
 	calculate_path()
-	setup_timer()
 	
-func _spawn_monsters():
-	if (num_monsters_left > 0):
+func update_build():
+	handle_structure()
+		
+func update_fighting():
+	print($SpawnCooldown.time_left)
+	if ($SpawnCooldown.is_stopped() && num_monsters_left > 0):
 		var robot = robot_scene.instance()
 		robot.set_global_position($SpawnPoint.global_position)
 		monster_list.add_child(robot)
 		robot.set_path(path)
 		num_monsters_left = num_monsters_left - 1
-	else:
-		spawn_timer.stop()
-
-func update_build():
-	handle_structure()
-		
-func update_fighting():
-	spawn_timer.start()
+		$SpawnCooldown.start()
+	
 	handle_hack()
 	handle_structure()
 	
 func handle_structure():
 	if Input.is_action_just_pressed("place_structure"):
-		print(get_viewport().get_mouse_position())
-		print($Camera2D.position)
 		var tile_clicked = position_to_tile(get_viewport().get_mouse_position())
 		var cell_type = get_cell_type(tile_clicked)
 		print(cell_type)
@@ -73,16 +67,19 @@ func handle_structure():
 		num_monsters_left = 5 * wave_number
 
 func handle_hack():
-	if Input.is_action_just_pressed("place_structure"):
-		var mouse = get_viewport().get_mouse_position()
-		var hits = get_parent().world_2d.direct_space_state.intersect_point(mouse)
-		if (hits.size() > 0):
-			var target = hits[0].collider
-			if (hacking):
-				var instance = load("res://src/scenes/hacks/" + hacks[chosen_hack] + ".tscn").instance()
-				instance.position = mouse
-				$Spells.add_child(instance)
-				instance.use()
+	print($HackCooldown.time_left)
+	if ($HackCooldown.is_stopped()):
+		if Input.is_action_just_pressed("place_structure"):
+			var mouse = get_viewport().get_mouse_position()
+			var hits = get_parent().world_2d.direct_space_state.intersect_point(mouse)
+			if (hits.size() > 0):
+				var target = hits[0].collider
+				if (hacking):
+					var instance = load("res://src/scenes/hacks/" + hacks[chosen_hack] + ".tscn").instance()
+					instance.position = mouse
+					$Spells.add_child(instance)
+					instance.use()
+					$HackCooldown.start(GameVariables.hack_cooldown)
 				
 	for i in range(hacks.size()):
 		var hack_str = "hack_" + str(i+1)
@@ -140,14 +137,6 @@ func calculate_path():
 		path[i].y -= 4
 		$Line2D.add_point(path[i])
 			
-func setup_timer():
-	spawn_timer = Timer.new()
-	add_child(spawn_timer)
-	spawn_timer.autostart = true
-	spawn_timer.wait_time = spawn_delay
-	spawn_timer.connect("timeout", self, "_spawn_monsters")
-	spawn_timer.start()
-
 func get_cell_type(tile):
 	return $Navigation2D/FactoryMap.get_cell(tile.x, tile.y)
 
