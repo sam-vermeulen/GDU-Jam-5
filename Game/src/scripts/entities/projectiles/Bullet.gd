@@ -44,9 +44,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Bullet_body_entered(body):
 	if (homing && body == targetBody || targetBody == null):
+		print(damage)
 		body.damage(damage)
 		queue_free()
 	elif (!homing && body.has_method("damage")):
+		print(damage)
 		body.damage(damage)
 		queue_free()
 		

@@ -4,7 +4,7 @@ var enemy_list = []
 
 onready var bullet_scene = load("res://src/scenes/entities/projectiles/Bullet.tscn")
 
-var cost = Vector3(50, 0, 1)
+var cost = GameVariables.turret_cost
 
 var shoot_delay = 0.2
 var shoot_timer = null
@@ -20,6 +20,7 @@ func _shoot():
 		
 		if (can_shoot):
 			var bullet = bullet_scene.instance()
+			bullet.damage = GameVariables.turret_damage
 			bullet.start_position(global_position, enemy_list[0])
 			$Bullets.add_child(bullet)
 			can_shoot = false
