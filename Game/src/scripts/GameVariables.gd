@@ -6,8 +6,8 @@ var mainframe_health = 200
 var spawn_rate = 0.1
 
 # starting
-var start_currency = Vector3(1000, 0, 51) # 50, 0, 51
-var start_wave = 15
+var start_currency = Vector3(50, 0, 51) # 50, 0, 51
+var start_wave = 1
 
 # turret
 var turret_cost = Vector3(50, 0, 1)
