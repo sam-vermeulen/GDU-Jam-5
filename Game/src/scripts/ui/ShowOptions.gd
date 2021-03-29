@@ -13,6 +13,7 @@ func expand():
 		$VBoxContainer/Turret.show()
 		$VBoxContainer/SlimeTurret.show()
 	else:
+		$VBoxContainer/Turret.hide()
 		$VBoxContainer/SlimeTurret.hide()
 
 
