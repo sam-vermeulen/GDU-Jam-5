@@ -11,6 +11,13 @@ var start_currency = Vector3(50, 0, 51)
 # turret
 var turret_cost = Vector3(50, 0, 1)
 var turret_damage = 50
+var turret_delay = 0.2
+
+# slime turret
+var slime_turret_cost = Vector3(0, 75, 0)
+var slime_turret_damage = 30
+var slime_turret_slow = 0.05
+var slime_turret_delay = 0.3
 
 # robot
 var robot_drop = Vector3(5, 0, 5)

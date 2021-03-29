@@ -2,11 +2,11 @@ extends Friendly
 
 var enemy_list = []
 
-onready var bullet_scene = load("res://src/scenes/entities/projectiles/Bullet.tscn")
+onready var bullet_scene = load("res://src/scenes/entities/projectiles/SlimeBullet.tscn")
 
-var cost = GameVariables.turret_cost
+var cost = GameVariables.slime_turret_cost
 
-var shoot_delay = GameVariables.turret_delay
+var shoot_delay = GameVariables.slime_turret_delay
 var shoot_timer = null
 var can_shoot = true
 
@@ -21,7 +21,8 @@ func _shoot():
 		if (can_shoot):
 			$AudioStreamPlayer2D.play()
 			var bullet = bullet_scene.instance()
-			bullet.damage = GameVariables.turret_damage
+			bullet.slow = GameVariables.slime_turret_slow
+			bullet.damage = GameVariables.slime_turret_damage
 			bullet.start_position(global_position, enemy_list[0])
 			$Bullets.add_child(bullet)
 			can_shoot = false

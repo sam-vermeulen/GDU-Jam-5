@@ -12,6 +12,7 @@ var currency = GameVariables.start_currency
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
 onready var turret_scene = load("res://src/scenes/entities/Turret.tscn")
+onready var slime_turret_scene = load("res://src/scenes/entities/SlimeTurret.tscn")
 var selected_structure_scene = null
 
 var path = PoolVector2Array()
@@ -29,10 +30,14 @@ func _ready():
 	$HUD/HackUI/Panel/Cooldown.text = String(GameVariables.hack_cooldown) + "s"
 	update_hud()
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret.connect("pressed", self, "change_turret", ["turret"])
+	$HUD/TurretMenu/Panel/VBoxContainer/SlimeTurret.connect("pressed", self, "change_turret", ["slime_turret"])
 	$HUD/HackUI/Panel/Cost.text = String(GameVariables.lightning_cost.z)
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Screws.text = String(GameVariables.turret_cost.x)
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret/Slime.text = String(GameVariables.turret_cost.y)
 	$HUD/TurretMenu/Panel/VBoxContainer/Turret/CPUs.text = String(GameVariables.turret_cost.z)
+	$HUD/TurretMenu/Panel/VBoxContainer/SlimeTurret/Screws.text = String(GameVariables.slime_turret_cost.x)
+	$HUD/TurretMenu/Panel/VBoxContainer/SlimeTurret/Slime.text = String(GameVariables.slime_turret_cost.y)
+	$HUD/TurretMenu/Panel/VBoxContainer/SlimeTurret/CPUs.text = String(GameVariables.slime_turret_cost.z)
 	$Mainframe.connect("damaged", self, "update_hud")
 	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	hacks.append("Explode")
@@ -169,6 +174,8 @@ func update_hud():
 func change_turret(button):
 	if button == "turret":
 		selected_structure_scene = turret_scene
+	elif button == "slime_turret":
+		selected_structure_scene = slime_turret_scene
 		
 func _process(delta):
 	$HUD/HackUI/Panel/Cooldown.text = String(stepify($HackCooldown.time_left, 0.01)) + "s"
