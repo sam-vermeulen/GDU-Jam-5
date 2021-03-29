@@ -28,8 +28,6 @@ func _get_transition(delta):
 	return null
 
 func _enter_state(new_state, old_state):
-	if (new_state == states.build || new_state == states.gameover):
-		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		
 	if (old_state == states.fight && new_state == states.build):
 		parent.wave_number == parent.wave_number + 1

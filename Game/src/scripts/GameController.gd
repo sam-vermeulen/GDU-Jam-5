@@ -91,7 +91,7 @@ func update_fighting():
 	
 func handle_structure():
 	if Input.is_action_just_pressed("place_structure"):
-		var tile_clicked = position_to_tile(get_viewport().get_mouse_position())
+		var tile_clicked = position_to_tile(get_viewport().get_mouse_position() + Vector2(8, 8))
 		var cell_type = get_cell_type(tile_clicked)
 		if cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
 			if (selected_structure_scene != null):
@@ -149,7 +149,7 @@ func _building():
 	if (monster_list.get_child_count() == 0):
 		$Grid.show()
 		$Line2D.show()
-		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
+		#Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		return true
 	return false
 
@@ -201,8 +201,10 @@ func update_hud():
 	
 func change_turret(button):
 	if button == "turret":
+		Input.set_custom_mouse_cursor(load("res://assets/cursors/turretcursor.png"))
 		selected_structure_scene = turret_scene
 	elif button == "slime_turret":
+		Input.set_custom_mouse_cursor(load("res://assets/cursors/slimeturretcursor.png"))
 		selected_structure_scene = slime_turret_scene
 		
 func _process(delta):
