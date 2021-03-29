@@ -3,13 +3,17 @@ extends Node
 onready var mainframe = $Mainframe
 
 var wave_number = 1
-var num_monsters_left = 0
+var wave_value = 0
+
+var spawn_list = []
+
 onready var monster_list = $Monsters
 onready var structure_list = $Structures
 
 var currency = GameVariables.start_currency
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
+onready var slime_scene = load("res://src/scenes/entities/Slime.tscn")
 onready var turret_scene = load("res://src/scenes/entities/Turret.tscn")
 var selected_structure_scene = null
 
@@ -19,6 +23,32 @@ var structure_positions = []
 var hacks = []
 var chosen_hack
 var hacking = false
+var start_wave = false
+
+var rng = RandomNumberGenerator.new()
+
+func get_enemy_cost_by_id(id):
+	match id:
+		GameVariables.slime_id: return GameVariables.slime_cost
+		GameVariables.robot_id: return GameVariables.robot_cost
+	
+
+func get_enemy_by_id(id):
+	match id:
+		GameVariables.slime_id: return slime_scene.instance()
+		GameVariables.robot_id: return robot_scene.instance()
+
+func get_random_enemy():
+	rng.randomize()
+	return rng.randi_range(0, 1)
+		
+func calculate_wave():
+	var value_left = wave_value
+	while value_left > 0:
+		var enemy_id = get_random_enemy()
+		if get_enemy_cost_by_id(enemy_id) <= wave_value:
+			spawn_list.append(enemy_id)
+			value_left = value_left - get_enemy_cost_by_id(enemy_id)
 
 func _ready():
 	$SpawnCooldown.wait_time = GameVariables.spawn_rate
@@ -40,23 +70,21 @@ func update_build():
 	handle_structure()
 		
 func update_fighting():
-	print($SpawnCooldown.time_left)
-	if ($SpawnCooldown.is_stopped() && num_monsters_left > 0):
-		var robot = robot_scene.instance()
-		robot.set_global_position($SpawnPoint.global_position)
-		monster_list.add_child(robot)
-		robot.set_path(path)
-		num_monsters_left = num_monsters_left - 1
+	if ($SpawnCooldown.is_stopped() && !spawn_list.empty()):
+		var enemy = get_enemy_by_id(spawn_list[0])
+		spawn_list.pop_front()
+		enemy.set_global_position($SpawnPoint.global_position)
+		monster_list.add_child(enemy)
+		enemy.set_path(path)
+		wave_value = wave_value - 1
 		$SpawnCooldown.start()
 	
 	handle_hack()
-	handle_structure()
 	
 func handle_structure():
 	if Input.is_action_just_pressed("place_structure"):
 		var tile_clicked = position_to_tile(get_viewport().get_mouse_position())
 		var cell_type = get_cell_type(tile_clicked)
-		print(cell_type)
 		if cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
 			if (selected_structure_scene != null):
 				var structure = selected_structure_scene.instance()
@@ -65,10 +93,9 @@ func handle_structure():
 					structure_positions.append(tile_clicked)
 					structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
-		num_monsters_left = 5 * wave_number
+		start_wave = true
 
 func handle_hack():
-	print($HackCooldown.time_left)
 	if ($HackCooldown.is_stopped()):
 		if Input.is_action_just_pressed("place_structure"):
 			var mouse = get_viewport().get_mouse_position()
@@ -93,7 +120,6 @@ func handle_hack():
 					hacking = false
 					#Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 				else:
-					print("hack")
 					hacking = true
 					chosen_hack = i
 					#Input.set_custom_mouse_cursor(load(hacks[chosen_hack].get_cursor()))
@@ -111,19 +137,20 @@ func update_pause():
 func update_gameover():
 	pass
 
-func _building():
-	$Grid.show()
-	$Line2D.show()
-	if (num_monsters_left == 0 && monster_list.get_child_count() == 0):
+func _building():	
+	if (monster_list.get_child_count() == 0):
+		$Grid.show()
+		$Line2D.show()
 		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		return true
 	return false
 
 func _fighting():
-	update_hud()
-	$Grid.hide()
-	$Line2D.hide()
-	if (num_monsters_left > 0 || monster_list.get_child_count() > 0):
+	if (start_wave):
+		start_wave = false
+		update_hud()
+		$Grid.hide()
+		$Line2D.hide()
 		return true
 	return false
 	
@@ -132,8 +159,9 @@ func _gameover():
 		return true
 	return false
 
-func calculate_monster_count(wave_number):
-	return 50 * wave_number * wave_number - 20
+func calculate_wave_value(wave_number):
+	wave_value = 50 * wave_number * wave_number - 20
+	calculate_wave()
 	
 func calculate_path():
 	path = $Navigation2D.get_simple_path($SpawnPoint.global_position, $Mainframe.global_position, false)

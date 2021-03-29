@@ -32,7 +32,10 @@ func _enter_state(new_state, old_state):
 		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		
 	if (old_state == states.fight && new_state == states.build):
-		parent.wave_number = parent.wave_number + 1
+		parent.wave_number == parent.wave_number + 1
+		
+	if (old_state == states.build && new_state == states.fight):
+		parent.calculate_wave_value(parent.wave_number)
 
 func _exit_state(old_state, new_state):
 	pass

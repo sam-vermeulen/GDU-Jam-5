@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sounds/shock.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 54.037
+radius = 63.0317
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 0
