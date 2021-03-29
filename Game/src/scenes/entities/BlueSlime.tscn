@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/SlimeEnemy.png" type="Texture" id=1]
-[ext_resource path="res://src/scripts/entities/enemies/SlimeEnemy.gd" type="Script" id=2]
+[ext_resource path="res://assets/blueslime.png" type="Texture" id=1]
+[ext_resource path="res://src/scripts/entities/enemies/BlueSlimeEnemy.gd" type="Script" id=2]
 [ext_resource path="res://src/scripts/entities/enemies/EnemyStates.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -46,7 +46,7 @@ position = Vector2( -0.15749, -0.196862 )
 scale = Vector2( 0.980314, 1.02461 )
 frames = SubResource( 6 )
 animation = "Slime"
-frame = 1
+frame = 3
 playing = true
 
 [node name="StateMachine" type="Node" parent="."]

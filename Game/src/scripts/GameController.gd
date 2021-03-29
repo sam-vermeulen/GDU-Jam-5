@@ -15,6 +15,7 @@ var currency = GameVariables.start_currency
 
 onready var robot_scene = load("res://src/scenes/entities/Robot.tscn")
 onready var slime_scene = load("res://src/scenes/entities/Slime.tscn")
+onready var blue_slime_scene = load("res://src/scenes/entities/BlueSlime.tscn")
 onready var turret_scene = load("res://src/scenes/entities/Turret.tscn")
 onready var slime_turret_scene = load("res://src/scenes/entities/SlimeTurret.tscn")
 var selected_structure_scene = null
@@ -33,26 +34,34 @@ func get_enemy_cost_by_id(id):
 	match id:
 		GameVariables.slime_id: return GameVariables.slime_cost
 		GameVariables.robot_id: return GameVariables.robot_cost
+		GameVariables.blue_slime_id: return GameVariables.blue_slime_cost
 	
 
 func get_enemy_by_id(id):
 	match id:
 		GameVariables.slime_id: return slime_scene.instance()
 		GameVariables.robot_id: return robot_scene.instance()
+		GameVariables.blue_slime_id: return blue_slime_scene.instance()
 
 func get_random_enemy():
 	rng.randomize()
-	return rng.randi_range(0, 1)
+	
+	if wave_number < 15:
+		return rng.randi_range(0,1)
+	else:
+		return rng.randi_range(0,2)
 		
 func calculate_wave():
 	var value_left = wave_value
 	while value_left > 0:
 		var enemy_id = get_random_enemy()
-		if get_enemy_cost_by_id(enemy_id) <= wave_value:
+		if get_enemy_cost_by_id(enemy_id) <= value_left:
 			spawn_list.append(enemy_id)
 			value_left = value_left - get_enemy_cost_by_id(enemy_id)
 
 func _ready():
+	wave_number = GameVariables.start_wave
+	currency = GameVariables.start_currency
 	if muted == false:
 		$AudioStreamPlayer.play()
 	$SpawnCooldown.wait_time = GameVariables.spawn_rate
@@ -110,7 +119,7 @@ func handle_hack():
 				currency = currency - GameVariables.lightning_cost
 				update_hud()
 				var instance = load("res://src/scenes/hacks/" + hacks[chosen_hack] + ".tscn").instance()
-				instance.position = mouse
+				instance.position = mouse + Vector2(8, 8)
 				$Spells.add_child(instance)
 				instance.use()
 				$HackCooldown.start(GameVariables.hack_cooldown)
@@ -155,7 +164,6 @@ func _building():
 	if (monster_list.get_child_count() == 0 && start_wave == false):
 		$Grid.show()
 		$Line2D.show()
-		#Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 		return true
 	return false
 

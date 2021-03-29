@@ -28,6 +28,8 @@ func _process(delta):
 	var start = global_position
 	var distance = move_speed * delta
 	
+	set_speed(move_speed * 1.005)
+	
 	for i in range(path.size()):
 		var next = start.distance_to(path[0])
 		
