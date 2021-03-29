@@ -31,20 +31,3 @@ margin_bottom = 16.0
 [node name="HackUI" parent="." instance=ExtResource( 5 )]
 margin_top = 368.0
 margin_right = -514.0
-
-[node name="Panel" type="Panel" parent="."]
-margin_left = 432.0
-margin_top = 368.0
-margin_right = 608.0
-margin_bottom = 384.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel"]
-margin_right = 176.0
-margin_bottom = 16.0
-text = "Press ENTER to start wave"
-__meta__ = {
-"_edit_use_anchors_": false
-}

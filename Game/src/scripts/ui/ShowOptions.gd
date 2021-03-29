@@ -11,8 +11,9 @@ func expand():
 	is_expanded = !is_expanded
 	if (is_expanded):
 		$VBoxContainer/Turret.show()
+		$VBoxContainer/SlimeTurret.show()
 	else:
-		$VBoxContainer/Turret.hide()
+		$VBoxContainer/SlimeTurret.hide()
 
 
 var last_rect_size = Vector2.ZERO
