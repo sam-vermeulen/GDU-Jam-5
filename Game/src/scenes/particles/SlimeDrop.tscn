@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Slime.png" type="Texture" id=1]
 
@@ -21,6 +21,20 @@ orbit_velocity_random = 0.0
 scale = 0.5
 scale_curve = SubResource( 2 )
 
+[sub_resource type="GDScript" id=4]
+script/source = "extends Particles2D
+
+func _ready():
+	play_animation()
+
+func play_animation():
+	emitting = true
+
+func _process(delta):
+	if not is_emitting():
+		queue_free()
+"
+
 [node name="SlimeDrop" type="Particles2D"]
 emitting = false
 amount = 10
@@ -29,3 +43,4 @@ one_shot = true
 speed_scale = 2.0
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )
+script = SubResource( 4 )

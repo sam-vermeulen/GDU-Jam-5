@@ -14,8 +14,8 @@ var turret_damage = 50
 var turret_delay = 0.2
 
 # slime turret
-var slime_turret_cost = Vector3(0, 75, 0)
-var slime_turret_damage = 30
+var slime_turret_cost = Vector3(50, 75, 5)
+var slime_turret_damage = 20
 var slime_turret_slow = 0.05
 var slime_turret_delay = 0.3
 
@@ -51,4 +51,7 @@ var lightning_range = 64
 
 # music
 var muted = false
+
+func calc_wave_function(wave_number):
+	return wave_number * wave_number + 10
 

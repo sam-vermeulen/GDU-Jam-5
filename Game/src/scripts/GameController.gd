@@ -84,7 +84,6 @@ func update_fighting():
 		enemy.set_global_position($SpawnPoint.global_position)
 		monster_list.add_child(enemy)
 		enemy.set_path(path)
-		wave_value = wave_value - 1
 		$SpawnCooldown.start()
 	
 	handle_hack()
@@ -93,7 +92,7 @@ func handle_structure():
 	if Input.is_action_just_pressed("place_structure"):
 		var tile_clicked = position_to_tile(get_viewport().get_mouse_position())
 		var cell_type = get_cell_type(tile_clicked)
-		if cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
+		if cell_type != null && cell_type != -1 && cell_type != 3 && !structure_positions.has(tile_clicked):
 			if (selected_structure_scene != null):
 				var structure = selected_structure_scene.instance()
 				if can_afford_structure(structure): # Pass in structure cost defined in hud
@@ -122,15 +121,22 @@ func handle_hack():
 			if (!hacking):
 				hacking = true
 				chosen_hack = i
-				#Input.set_custom_mouse_cursor(load(hacks[chosen_hack].get_cursor()))
+				Input.set_custom_mouse_cursor(get_cursor_by_hack_name(hacks[chosen_hack]))
 			elif (hacking):
 				if (i == chosen_hack):
 					hacking = false
-					#Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
+					Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 				else:
 					hacking = true
 					chosen_hack = i
-					#Input.set_custom_mouse_cursor(load(hacks[chosen_hack].get_cursor()))
+					Input.set_custom_mouse_cursor(get_cursor_by_hack_name(hacks[chosen_hack]))
+
+func get_cursor_by_hack_name(name):
+	match name:
+		"Lightning":
+			return load("res://assets/cursors/lightningcursor.png")
+		"Explode":
+			return load("res://assets/cursors/bombcursor.png")
 
 func can_afford_structure(structure):
 	if currency.x >= structure.cost.x && currency.y >= structure.cost.y && currency.z >= structure.cost.z:
@@ -146,7 +152,7 @@ func update_gameover():
 	pass
 
 func _building():	
-	if (monster_list.get_child_count() == 0):
+	if (monster_list.get_child_count() == 0 && start_wave == false):
 		$Grid.show()
 		$Line2D.show()
 		Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
@@ -168,7 +174,7 @@ func _gameover():
 	return false
 
 func calculate_wave_value(wave_number):
-	wave_value = 50 * wave_number * wave_number - 20
+	wave_value = GameVariables.calc_wave_function(wave_number)
 	calculate_wave()
 	
 func calculate_path():
