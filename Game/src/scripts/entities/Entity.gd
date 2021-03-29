@@ -8,7 +8,6 @@ export(float) var max_health
 onready var health = max_health setget _set_health
 
 func damage(amount):
-	print("health" + str(health))
 	_set_health(health - amount)
 
 func kill():

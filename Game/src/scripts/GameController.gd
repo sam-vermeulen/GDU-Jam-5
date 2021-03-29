@@ -96,7 +96,7 @@ func handle_structure():
 			if (selected_structure_scene != null):
 				var structure = selected_structure_scene.instance()
 				if can_afford_structure(structure): # Pass in structure cost defined in hud
-					structure.set_position(snap_to_grid(get_viewport().get_mouse_position()))
+					structure.set_position(snap_to_grid(get_viewport().get_mouse_position() + Vector2(8, 8)))
 					structure_positions.append(tile_clicked)
 					structure_list.add_child(structure)
 	elif Input.is_action_just_pressed("next_wave"):
@@ -206,12 +206,13 @@ func update_hud():
 	$HUD/WaveMenu/Panel/WaveNum.text = String(wave_number)
 	
 func change_turret(button):
-	if button == "turret":
-		Input.set_custom_mouse_cursor(load("res://assets/cursors/turretcursor.png"))
-		selected_structure_scene = turret_scene
-	elif button == "slime_turret":
-		Input.set_custom_mouse_cursor(load("res://assets/cursors/slimeturretcursor.png"))
-		selected_structure_scene = slime_turret_scene
+	if ($GameState.state == $GameState.states.build):
+		if button == "turret":
+			Input.set_custom_mouse_cursor(load("res://assets/cursors/turretcursor.png"))
+			selected_structure_scene = turret_scene
+		elif button == "slime_turret":
+			Input.set_custom_mouse_cursor(load("res://assets/cursors/slimeturretcursor.png"))
+			selected_structure_scene = slime_turret_scene
 		
 func _process(delta):
 	$HUD/HackUI/Panel/Cooldown.text = String(stepify($HackCooldown.time_left, 0.01)) + "s"
