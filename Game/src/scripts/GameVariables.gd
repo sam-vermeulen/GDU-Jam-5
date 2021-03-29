@@ -31,3 +31,6 @@ var lightning_cost = Vector3(0, 0, 25)
 var lightning_strength = 0.4
 var lightning_range = 4
 
+# music
+var muted = false
+

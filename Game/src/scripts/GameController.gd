@@ -6,6 +6,7 @@ var wave_number = 1
 var num_monsters_left = 0
 onready var monster_list = $Monsters
 onready var structure_list = $Structures
+var muted = GameVariables.muted
 
 var currency = GameVariables.start_currency
 
@@ -21,6 +22,8 @@ var chosen_hack
 var hacking = false
 
 func _ready():
+	if muted == false:
+		$AudioStreamPlayer.play()
 	$SpawnCooldown.wait_time = GameVariables.spawn_rate
 	$HackCooldown.wait_time = GameVariables.hack_cooldown
 	$HUD/HackUI/Panel/Cooldown.text = String(GameVariables.hack_cooldown) + "s"
@@ -169,3 +172,12 @@ func change_turret(button):
 		
 func _process(delta):
 	$HUD/HackUI/Panel/Cooldown.text = String(stepify($HackCooldown.time_left, 0.01)) + "s"
+	if Input.is_action_just_pressed("Mute"):
+		if muted:
+			$AudioStreamPlayer.play()
+			muted = false
+			GameVariables.muted = muted
+		else:
+			$AudioStreamPlayer.stop()
+			muted = true
+			GameVariables.muted = muted
