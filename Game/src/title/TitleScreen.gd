@@ -4,6 +4,7 @@ var load_scene
 var muted = GameVariables.muted
 
 func _ready():
+	Input.set_custom_mouse_cursor(load("res://assets/cursors/deafultcursor.png"))
 	if muted == false:
 		$AudioStreamPlayer.play()
 	for button in $Menu/Center/Buttons.get_children():

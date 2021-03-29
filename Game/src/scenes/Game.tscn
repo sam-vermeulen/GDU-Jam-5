@@ -71,9 +71,9 @@ stream = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 448.0
-margin_top = 128.0
+margin_top = 112.0
 margin_right = 608.0
-margin_bottom = 384.0
+margin_bottom = 368.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
